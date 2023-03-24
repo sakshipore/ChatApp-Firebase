@@ -1,4 +1,5 @@
 import 'package:chat_app/controller/auth_controller.dart';
+import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/heading_text.dart';
 import 'package:chat_app/widgets/my_button.dart';
 import 'package:chat_app/widgets/my_text_form_field.dart';
@@ -17,79 +18,102 @@ class RegisterScreen extends StatelessWidget {
     return GetBuilder<AuthController>(builder: (controller) {
       return Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20.h,
+          child: controller.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xffee7b64),
                   ),
-                  HeadingText(
-                    text: "Groupie",
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  NormalText(
-                    text: "Create your account now to chat and explore",
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    "assets/register.png",
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  MyTextFormField(
-                    icon: Icon(
-                      Icons.person,
-                      color: Color(0xffee7b64),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        HeadingText(
+                          text: "Groupie",
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        NormalText(
+                          text: "Create your account now to chat and explore",
+                        ),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        Image.asset(
+                          "assets/register.png",
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        MyTextFormField(
+                          icon: Icon(
+                            Icons.person,
+                            color: Color(0xffee7b64),
+                          ),
+                          text: "Full Name",
+                          controller: controller.fullNameController,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        MyTextFormField(
+                          icon: Icon(
+                            Icons.mail,
+                            color: Color(0xffee7b64),
+                          ),
+                          text: "Email",
+                          controller: controller.emailController,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        MyTextFormField(
+                          icon: Icon(
+                            Icons.lock,
+                            color: Color(0xffee7b64),
+                          ),
+                          text: "Password",
+                          controller: controller.passwordController,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        MyButton(
+                          onTap: () async {
+                            bool isRegistered;
+                            isRegistered = await controller.register();
+                            if (isRegistered == true) {
+                              Get.toNamed(
+                                RoutesNames.homeScreen,
+                              );
+                            } else {
+                              Get.back();
+                            }
+                          },
+                          height: 40.h,
+                          width: MediaQuery.of(context).size.width,
+                          text: "Register",
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RoutesNames.loginScreen);
+                          },
+                          child: NormalText(
+                            text: "Already have an account? Login now",
+                          ),
+                        ),
+                      ],
                     ),
-                    text: "Full Name",
-                    controller: controller.nameController,
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  MyTextFormField(
-                    icon: Icon(
-                      Icons.mail,
-                      color: Color(0xffee7b64),
-                    ),
-                    text: "Email",
-                    controller: controller.emailController,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  MyTextFormField(
-                    icon: Icon(
-                      Icons.lock,
-                      color: Color(0xffee7b64),
-                    ),
-                    text: "Password",
-                    controller: controller.passwordController,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  MyButton(
-                    height: 40.h,
-                    width: MediaQuery.of(context).size.width,
-                    text: "Register",
-                    onTap: () {},
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  NormalText(text: "Already have an account? Login now"),
-                ],
-              ),
-            ),
-          ),
+                ),
         ),
       );
     });
