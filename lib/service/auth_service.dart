@@ -9,6 +9,7 @@ class AuthService {
   //? login
 
   //? register
+  //TODO: CHECK RETURN TYPE
   Future registerSignWithEmailAndPassword(
       String fullName, String email, String password) async {
     try {

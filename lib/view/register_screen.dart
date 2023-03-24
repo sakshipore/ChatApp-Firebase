@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/heading_text.dart';
@@ -85,14 +87,13 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         MyButton(
                           onTap: () async {
-                            bool isRegistered;
+                            bool? isRegistered = false;
                             isRegistered = await controller.register();
+                            log(isRegistered.toString());
                             if (isRegistered == true) {
                               Get.toNamed(
                                 RoutesNames.homeScreen,
                               );
-                            } else {
-                              Get.back();
                             }
                           },
                           height: 40.h,

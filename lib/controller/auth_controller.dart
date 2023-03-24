@@ -13,20 +13,21 @@ class AuthController extends GetxController {
   AuthService authService = AuthService();
   bool isLoading = false;
 
-  Future<bool> register() async {
+  Future<bool?> register() async {
     try {
       isLoading = true;
       update();
       await authService
           .registerSignWithEmailAndPassword(fullNameController.text,
-              emailController.text, passwordController.text)
+              emailController.text.trim(), passwordController.text)
           .then((value) async {
         if (value == true) {
           // saving the shared preference data
           await HelperFunction.saveUserLoggedInStatus(true);
           await HelperFunction.saveUserEmailSF(emailController.text);
           await HelperFunction.saveUserNameSF(fullNameController.text);
-          return true;
+          isLoading = false;
+          update();
         } else {
           showSnackBar(Colors.red, value, "Error");
           return false;
@@ -36,7 +37,6 @@ class AuthController extends GetxController {
       log(e.toString());
       return false;
     }
-
-    return false;
+    return true;
   }
 }
