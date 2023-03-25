@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeadingText extends StatelessWidget {
+  //TODO: DO NOT MAKE TEXT WIDGETS
   final String text;
   HeadingText({super.key, required this.text});
 

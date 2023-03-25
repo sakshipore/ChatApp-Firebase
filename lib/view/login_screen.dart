@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/heading_text.dart';
@@ -18,76 +20,91 @@ class LoginScreen extends StatelessWidget {
     return GetBuilder<AuthController>(builder: (controller) {
       return Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20.h,
+          child: controller.isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xffee7b64),
                   ),
-                  HeadingText(
-                    text: "Groupie",
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  NormalText(
-                    text: "Login now to see what they are talking",
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Image.asset(
-                    "assets/login.png",
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  MyTextFormField(
-                    icon: Icon(
-                      Icons.mail,
-                      color: Color(0xffee7b64),
+                )
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        HeadingText(
+                          text: "Groupie",
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        NormalText(
+                          text: "Login now to see what they are talking",
+                        ),
+                        SizedBox(
+                          height: 40.h,
+                        ),
+                        Image.asset(
+                          "assets/login.png",
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        MyTextFormField(
+                          icon: Icon(
+                            Icons.mail,
+                            color: Color(0xffee7b64),
+                          ),
+                          text: "Email",
+                          controller: controller.emailController,
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        MyTextFormField(
+                          icon: Icon(
+                            Icons.lock,
+                            color: Color(0xffee7b64),
+                          ),
+                          text: "Password",
+                          controller: controller.passwordController,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        MyButton(
+                          onTap: () async {
+                            bool? isRegistered = false;
+                            isRegistered = await controller.login();
+                            log(isRegistered.toString());
+                            if (isRegistered == true) {
+                              Get.toNamed(
+                                RoutesNames.homeScreen,
+                              );
+                            }
+                          },
+                          height: 40.h,
+                          width: MediaQuery.of(context).size.width,
+                          text: "Login",
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              RoutesNames.registerScreen,
+                            );
+                          },
+                          child: NormalText(
+                              text: "Don't have an account? Register here"),
+                        ),
+                      ],
                     ),
-                    text: "Email",
-                    controller: controller.emailController,
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  MyTextFormField(
-                    icon: Icon(
-                      Icons.lock,
-                      color: Color(0xffee7b64),
-                    ),
-                    text: "Password",
-                    controller: controller.passwordController,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  MyButton(
-                    onTap: () {},
-                    height: 40.h,
-                    width: MediaQuery.of(context).size.width,
-                    text: "Login",
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(
-                        RoutesNames.registerScreen,
-                      );
-                    },
-                    child: NormalText(
-                        text: "Don't have an account? Register here"),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                ),
         ),
       );
     });
