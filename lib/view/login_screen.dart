@@ -1,11 +1,10 @@
 import 'dart:developer';
 
+import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
-import 'package:chat_app/widgets/heading_text.dart';
 import 'package:chat_app/widgets/my_button.dart';
 import 'package:chat_app/widgets/my_text_form_field.dart';
-import 'package:chat_app/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -34,15 +33,12 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        HeadingText(
-                          text: "Groupie",
-                        ),
+                        Text("Groupie", style: MyTextStyle.headingStyle),
                         SizedBox(
                           height: 10.h,
                         ),
-                        NormalText(
-                          text: "Login now to see what they are talking",
-                        ),
+                        Text("Login now to see what they are talking",
+                            style: MyTextStyle.normalStyle),
                         SizedBox(
                           height: 40.h,
                         ),
@@ -76,14 +72,12 @@ class LoginScreen extends StatelessWidget {
                         ),
                         MyButton(
                           onTap: () async {
-                            bool? isRegistered = false;
-                            isRegistered = await controller.login();
-                            log(isRegistered.toString());
-                            if (isRegistered == true) {
-                              Get.toNamed(
-                                RoutesNames.homeScreen,
-                              );
-                            }
+                            // bool? isRegistered = false;
+                            await controller.login();
+                            // log(isRegistered.toString());
+                            // if (isRegistered == true) {
+                            //   Get.toNamed(RoutesNames.homeScreen);
+                            // }
                           },
                           height: 40.h,
                           width: MediaQuery.of(context).size.width,
@@ -98,8 +92,8 @@ class LoginScreen extends StatelessWidget {
                               RoutesNames.registerScreen,
                             );
                           },
-                          child: NormalText(
-                              text: "Don't have an account? Register here"),
+                          child: Text("Don't have an account? Register here",
+                              style: MyTextStyle.normalStyle),
                         ),
                       ],
                     ),

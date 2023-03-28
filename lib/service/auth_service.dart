@@ -8,37 +8,43 @@ class AuthService {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   //? login
-  Future<bool?> logInWithEmailAndPassword(String email, String password) async {
+  Future<User?> logInWithEmailAndPassword(String email, String password) async {
     try {
-      User user = (await firebaseAuth.signInWithEmailAndPassword(
+      User? user = (await firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
-          .user!;
+          .user;
 
       if (user != null) {
-        return true;
+        return user;
+      } else {
+        log("User=null");
+        return null;
       }
     } on FirebaseAuthException catch (e) {
       log(e.toString());
-      return false;
+      return null;
     }
   }
 
   //? register
-  Future<bool?> registerSignWithEmailAndPassword(
+  Future<User?> registerSignWithEmailAndPassword(
       String fullName, String email, String password) async {
     try {
-      User user = (await firebaseAuth.createUserWithEmailAndPassword(
+      User? user = (await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
-          .user!;
+          .user;
 
       if (user != null) {
         // calls database service to update the user data
         await DatabaseService(uid: user.uid).savingUserData(fullName, email);
-        return true;
+        return user;
+      } else {
+        log("User=null");
+        return null;
       }
     } on FirebaseAuthException catch (e) {
       log(e.toString());
-      return false;
+      return null;
     }
   }
 

@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:chat_app/helper/helper_function.dart';
+import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/service/auth_service.dart';
-import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/show_snackbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,56 +15,66 @@ class AuthController extends GetxController {
   AuthService authService = AuthService();
   bool isLoading = false;
 
-  Future<bool?> register() async {
+  Future<bool> register() async {
     try {
       isLoading = true;
       update();
-      await authService
-          .registerSignWithEmailAndPassword(fullNameController.text,
-              emailController.text.trim(), passwordController.text)
-          .then((value) async {
-        if (value == true) {
-          // saving the shared preference data
-          await HelperFunction.saveUserLoggedInStatus(true);
-          await HelperFunction.saveUserEmailSF(emailController.text);
-          await HelperFunction.saveUserNameSF(fullNameController.text);
-          isLoading = false;
-          update();
-        } else {
-          showSnackBar(Colors.red, "", "Error");
-          return false;
-        }
-      });
+      User? user = await authService.registerSignWithEmailAndPassword(
+          fullNameController.text,
+          emailController.text.trim(),
+          passwordController.text);
+      if (user != null) {
+        // saving the shared preference data
+        await HelperFunction.saveUserLoggedInStatus(true);
+        await HelperFunction.saveUserEmailSF(emailController.text);
+        await HelperFunction.saveUserNameSF(fullNameController.text);
+        Get.toNamed(
+          RoutesNames.homeScreen,
+        );
+        return true;
+      } else {
+        showSnackBar(Colors.red, "", "Error");
+        return false;
+      }
     } catch (e) {
       log(e.toString());
       return false;
+    } finally {
+      isLoading = false;
+      update();
     }
-    return true;
   }
 
-//TODO: LOGIN NOT WORKING
-  Future<bool?> login() async {
+  Future<bool> login() async {
     try {
       isLoading = true;
       update();
-      await authService
-          .logInWithEmailAndPassword(
-              emailController.text, passwordController.text)
-          .then((value) async {
-        if (value == true) {
-          QuerySnapshot snapshot=await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid).gettingUserData(emailController.text);
-          // saving the values to our shared preference
-          await HelperFunction.saveUserLoggedInStatus(true);
-          await HelperFunction.saveUserEmailSF(emailController.text);
-          await HelperFunction.saveUserNameSF(snapshot.docs[0]['fullName']);
-          isLoading = false;
-          update();
-        }
-      });
+      User? user = await authService.logInWithEmailAndPassword(
+          emailController.text.trim(), passwordController.text);
+
+      if (user != null) {
+        await HelperFunction.saveUserLoggedInStatus(true);
+        await HelperFunction.saveUserEmailSF(user.email!);
+        //TODO: NAME NOT BEING DISPLAAYED
+        // await HelperFunction.saveUserNameSF(user.);
+        // isLoading = false;
+        // update();
+        Get.toNamed(RoutesNames.homeScreen);
+        return true;
+      } else {
+        // isLoading = false;
+        // update();
+        return false;
+      }
     } catch (e) {
       log(e.toString());
+      showSnackBar(Colors.red, e.toString(), "Login failed");
+      // isLoading = false;
+      // update();
       return false;
+    } finally {
+      isLoading = false;
+      update();
     }
-    return true;
   }
 }

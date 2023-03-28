@@ -1,11 +1,10 @@
 import 'dart:developer';
 
+import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
-import 'package:chat_app/widgets/heading_text.dart';
 import 'package:chat_app/widgets/my_button.dart';
 import 'package:chat_app/widgets/my_text_form_field.dart';
-import 'package:chat_app/widgets/normal_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -34,15 +33,12 @@ class RegisterScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        HeadingText(
-                          text: "Groupie",
-                        ),
+                        Text("Groupie", style: MyTextStyle.headingStyle),
                         SizedBox(
                           height: 10.h,
                         ),
-                        NormalText(
-                          text: "Create your account now to chat and explore",
-                        ),
+                        Text("Create your account now to chat and explore",
+                            style: MyTextStyle.normalStyle),
                         SizedBox(
                           height: 40.h,
                         ),
@@ -87,14 +83,14 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         MyButton(
                           onTap: () async {
-                            bool? isRegistered = false;
-                            isRegistered = await controller.register();
-                            log(isRegistered.toString());
-                            if (isRegistered == true) {
-                              Get.toNamed(
-                                RoutesNames.homeScreen,
-                              );
-                            }
+                            // bool? isRegistered = false;
+                            await controller.register();
+                            // log(isRegistered.toString());
+                            // if (isRegistered == true) {
+                            //   Get.toNamed(
+                            //     RoutesNames.homeScreen,
+                            //   );
+                            // }
                           },
                           height: 40.h,
                           width: MediaQuery.of(context).size.width,
@@ -107,9 +103,8 @@ class RegisterScreen extends StatelessWidget {
                           onTap: () {
                             Get.toNamed(RoutesNames.loginScreen);
                           },
-                          child: NormalText(
-                            text: "Already have an account? Login now",
-                          ),
+                          child: Text("Already have an account? Login now",
+                              style: MyTextStyle.normalStyle),
                         ),
                       ],
                     ),
