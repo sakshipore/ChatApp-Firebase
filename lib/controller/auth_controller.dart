@@ -55,7 +55,7 @@ class AuthController extends GetxController {
       if (user != null) {
         await HelperFunction.saveUserLoggedInStatus(true);
         await HelperFunction.saveUserEmailSF(user.email!);
-        //TODO: NAME NOT BEING DISPLAAYED
+        //TODO: NAME NOT BEING DISPLAYED
         // await HelperFunction.saveUserNameSF(user.);
         // isLoading = false;
         // update();
@@ -77,4 +77,21 @@ class AuthController extends GetxController {
       update();
     }
   }
+
+  // logOut() async {
+  //   try {
+  //     isLoading = true;
+  //     update();
+  //     await authService.logOut();
+  //     Get.toNamed(RoutesNames.loginScreen);
+  //     return true;
+  //   } catch (e) {
+  //     log(e.toString());
+  //     showSnackBar(Colors.red, e.toString(), "LogOut failed");
+  //     return false;
+  //   } finally {
+  //     isLoading = false;
+  //     update();
+  //   }
+  // }
 }
