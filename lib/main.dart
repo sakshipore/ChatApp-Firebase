@@ -27,35 +27,26 @@ void main() async {
     await Firebase.initializeApp();
   }
 
-  runApp(const MyApp());
+  bool isLoggedin = await HelperFunction.getUserLoggedInStatus() ?? false;
+
+  runApp(MyApp(isLoggedin: isLoggedin));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool isLoggedin;
+  MyApp({
+    super.key,
+    required this.isLoggedin,
+  });
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isSignedIn = false;
-
   @override
   void initState() {
     super.initState();
-    getUserLoggedInStatus();
-  }
-
-  getUserLoggedInStatus() async {
-    await HelperFunction.getUserLoggedInStatus().then(
-      (value) {
-        if (value != null) {
-          setState(() {
-            _isSignedIn = value;
-          });
-        }
-      },
-    );
   }
 
   @override
@@ -66,7 +57,9 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: _isSignedIn ? RoutesNames.homeScreen : RoutesNames.loginScreen,
+          initialRoute: widget.isLoggedin
+              ? RoutesNames.homeScreen
+              : RoutesNames.loginScreen,
           getPages: AppRoutes.routes,
         );
       },

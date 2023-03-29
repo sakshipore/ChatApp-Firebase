@@ -1,4 +1,5 @@
 import 'package:chat_app/constants/text_style.dart';
+import 'package:chat_app/controller/profile_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/service/auth_service.dart';
 import 'package:chat_app/widgets/my_button.dart';
@@ -18,6 +19,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthService authService = AuthService();
+    ProfileController profileController = Get.find<ProfileController>();
 
     return Drawer(
       child: ListView(
@@ -31,12 +33,12 @@ class MyDrawer extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          Center(
-            child: Text(
-              userName!,
-              style: MyTextStyle.normalStyle,
-            ),
-          ),
+          // Center(
+          //   child: Text(
+          //     userName!,
+          //     style: MyTextStyle.normalStyle,
+          //   ),
+          // ),
           SizedBox(
             height: 10.h,
           ),
@@ -71,7 +73,7 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () async {
-              await authService.logOut();
+              await profileController.logOut();
               Get.toNamed(RoutesNames.loginScreen);
             },
             leading: Icon(Icons.exit_to_app),
