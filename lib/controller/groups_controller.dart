@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/show_snackbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,8 @@ class GroupsController extends GetxController {
       DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid);
   bool isLoading = true;
   Stream? groups;
+  Stream<QuerySnapshot>? chats;
+  String? groupAdmin;
 
   Future<void> getUserGroups() async {
     groups = await service.getUserGroups();
@@ -41,5 +44,21 @@ class GroupsController extends GetxController {
       isLoading = false;
       update();
     }
+  }
+
+  Future getChats(String groupId) async {
+    isLoading = false;
+    update();
+    chats = await service.getChats(groupId);
+    isLoading = true;
+    update();
+  }
+
+  Future getGroupAdmin(String groupId) async {
+    isLoading = false;
+    update();
+    groupAdmin = await service.getGroupAdmin(groupId);
+    isLoading = true;
+    update();
   }
 }

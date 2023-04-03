@@ -1,5 +1,6 @@
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/view/chat_screen.dart';
+import 'package:chat_app/view/group_info.dart';
 import 'package:chat_app/view/home_screeen.dart';
 import 'package:chat_app/view/login_screen.dart';
 import 'package:chat_app/view/profile_screen.dart';
@@ -36,6 +37,15 @@ class AppRoutes {
         groupId: Get.arguments["groupId"],
         groupName: Get.arguments["groupName"],
         userName: Get.arguments["userName"],
+      ),
+    ),
+    GetPage(
+      name: RoutesNames.groupInfoScreen,
+      arguments: Map<String, dynamic>,
+      page: () => GroupInfo(
+        groupId: Get.arguments["groupId"],
+        groupName: Get.arguments["groupName"],
+        adminName: Get.arguments["adminName"],
       ),
     ),
   ];

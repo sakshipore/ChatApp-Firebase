@@ -5,4 +5,5 @@ class RoutesNames {
   static const String searchScreen = "/search";
   static const String profileScreen = "/profile";
   static const String chatScreen = "/chat";
+  static const String groupInfoScreen = "groupInfo";
 }
