@@ -8,13 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MyDrawer extends StatelessWidget {
-  String? userName;
-  String? email;
-  MyDrawer({
-    super.key,
-    required this.userName,
-    required this.email,
-  });
+  MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +29,7 @@ class MyDrawer extends StatelessWidget {
           ),
           // Center(
           //   child: Text(
-          //     userName!,
+          //                           profileController.userData['email'],
           //     style: MyTextStyle.normalStyle,
           //   ),
           // ),
@@ -44,7 +38,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Center(
             child: Text(
-              email!,
+              profileController.userData['email'],
               style: MyTextStyle.normalStyle,
             ),
           ),
@@ -72,9 +66,35 @@ class MyDrawer extends StatelessWidget {
             title: Text("Profile", style: MyTextStyle.normalStyle),
           ),
           ListTile(
-            onTap: () async {
-              await profileController.logOut();
-              Get.toNamed(RoutesNames.loginScreen);
+            onTap: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Logout",
+                      ),
+                      content: Text(
+                        "Are you sure you want to logout ?",
+                      ),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(Icons.cancel),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            await profileController.logOut();
+                            Get.toNamed(RoutesNames.loginScreen);
+                          },
+                          icon: Icon(Icons.check),
+                        ),
+                      ],
+                    );
+                  });
             },
             leading: Icon(Icons.exit_to_app),
             selectedColor: Color(0xffee7b64),
@@ -83,16 +103,6 @@ class MyDrawer extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
             title: Text("LogOut", style: MyTextStyle.normalStyle),
           ),
-          //TODO: MAKE BUTTON SO THAT USER CAN LOGOUT. ON TAP SHOULD CALL FUNCTION LOGOUT AND NAVIGATE TO LOGIN SCREEN
-          // MyButton(
-          // onTap: () async{
-          //   await
-
-          // },
-          //   height: 20.h,
-          //   width: 30.w,
-          //   text: "LogOut",
-          // ),
         ],
       ),
     );
