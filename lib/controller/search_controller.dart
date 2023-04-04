@@ -17,7 +17,7 @@ class SearchController extends GetxController {
   String? userName;
   bool isJoined = false;
 
-  initiateSearchMethod() async {
+  Future<void> initiateSearchMethod() async {
     if (searchController.text.isNotEmpty) {
       isLoading = true;
       update();
@@ -32,7 +32,8 @@ class SearchController extends GetxController {
     }
   }
 
-  groupList() {
+  //! maybe repeated
+   groupList() {
     return hasUserSearched
         ? ListView.builder(
             shrinkWrap: true,

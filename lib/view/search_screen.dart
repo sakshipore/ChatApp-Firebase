@@ -13,51 +13,55 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SearchController searchController = Get.put(SearchController());
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Color(0xffee7b64),
-        title: Text(
-          "Search",
-          style: TextStyle(
-            fontSize: 27.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: Color(0xffee7b64),
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-            child: Row(
-              children: [
-                Expanded(
-                  child: SearchTextField(
-                      controller: searchController.searchController),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    width: 40.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(40.r),
-                    ),
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+    return GetBuilder<SearchController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: Color(0xffee7b64),
+            title: Text(
+              "Search",
+              style: TextStyle(
+                fontSize: 27.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
-        ],
-      ),
+          body: Column(
+            children: [
+              Container(
+                color: Color(0xffee7b64),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SearchTextField(
+                          controller: controller.searchController),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: 40.w,
+                        height: 40.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(40.r),
+                        ),
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }
     );
   }
 }

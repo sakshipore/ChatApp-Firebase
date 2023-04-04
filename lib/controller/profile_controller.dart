@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
     update();
   }
 
-  logOut() async {
+  Future<bool> logOut() async {
     try {
       isLoading = true;
       update();

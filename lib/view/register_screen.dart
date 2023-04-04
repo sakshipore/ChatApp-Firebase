@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';

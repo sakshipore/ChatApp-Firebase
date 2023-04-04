@@ -13,7 +13,7 @@ class GroupsController extends GetxController {
 
   bool isLoading = true;
   Stream? groups;
-  Stream<QuerySnapshot>? chats;
+  // Stream<QuerySnapshot>? chats;
   String? groupAdmin;
   Stream? members;
 
@@ -49,15 +49,15 @@ class GroupsController extends GetxController {
     }
   }
 
-  Future getChats(String groupId) async {
-    isLoading = false;
-    update();
-    chats = await service.getChats(groupId);
-    isLoading = true;
-    update();
-  }
+  // Future getChats(String groupId) async {
+  //   isLoading = false;
+  //   update();
+  //   chats = await service.getChats(groupId);
+  //   isLoading = true;
+  //   update();
+  // }
 
-  Future getGroupAdmin(String groupId) async {
+  Future<void> getGroupAdmin(String groupId) async {
     isLoading = false;
     update();
     groupAdmin = await service.getGroupAdmin(groupId);
@@ -65,23 +65,24 @@ class GroupsController extends GetxController {
     update();
   }
 
-  Future getGroupMembers(String groupId) async {
+  Future<void> getGroupMembers(String groupId) async {
     members = await service.getGroupMembers(groupId);
     update();
   }
 
-  sendMessage(TextEditingController messageController, String userName,
-      String groupId) async {
-    if (messageController.text.isNotEmpty) {
-      Map<String, dynamic> chatMessageData = {
-        "message": messageController.text,
-        "sender": userName,
-        "time": DateTime.now().microsecondsSinceEpoch,
-      };
+  // sendMessage(TextEditingController messageController, String userName,
+  //     String groupId) async {
+  //   if (messageController.text.isNotEmpty) {
+  //     Map<String, dynamic> chatMessageData = {
+  //       "message": messageController.text,
+  //       "sender": userName,
+  //       "time": DateTime.now().microsecondsSinceEpoch,
+  //     };
 
-      await service.sendMessage(groupId, chatMessageData);
-      update();
-      messageController.clear();
-    }
-  }
+  //     await service.sendMessage(groupId, chatMessageData);
+  //     update();
+  //     messageController.clear();
+  //   }
+  // }
+  
 }

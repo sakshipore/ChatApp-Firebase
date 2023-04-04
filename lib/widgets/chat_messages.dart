@@ -1,4 +1,5 @@
 import 'package:chat_app/controller/groups_controller.dart';
+import 'package:chat_app/controller/message_controller.dart';
 import 'package:chat_app/widgets/message_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,10 @@ class ChatMessages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GroupsController groupsController = Get.find<GroupsController>();
+    MessageController messageController = Get.find<MessageController>();
+    
     return StreamBuilder(
-        stream: groupsController.chats,
+        stream: messageController.chats,
         builder: (context, AsyncSnapshot snapshot) {
           return snapshot.hasData
               ? ListView.builder(
