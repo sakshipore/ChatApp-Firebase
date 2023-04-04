@@ -14,6 +14,7 @@ class GroupsController extends GetxController {
   Stream? groups;
   Stream<QuerySnapshot>? chats;
   String? groupAdmin;
+  Stream? members;
 
   Future<void> getUserGroups() async {
     groups = await service.getUserGroups();
@@ -26,7 +27,7 @@ class GroupsController extends GetxController {
     return res.substring(0, res.indexOf("_"));
   }
 
-  String getGroupName(String res) {
+  String getName(String res) {
     return res.substring(0, res.indexOf("_") + 1);
   }
 
@@ -59,6 +60,11 @@ class GroupsController extends GetxController {
     update();
     groupAdmin = await service.getGroupAdmin(groupId);
     isLoading = true;
+    update();
+  }
+
+  Future getGroupMembers(String groupId) async {
+    members = await service.getGroupMembers(groupId);
     update();
   }
 }

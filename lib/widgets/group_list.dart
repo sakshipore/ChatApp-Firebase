@@ -25,7 +25,7 @@ class GroupList extends StatelessWidget {
                     groupId:
                         groupsController.getId(snapshot.data['groups'][reverseIndex]),
                     groupName: groupsController
-                        .getGroupName(snapshot.data['groups'][reverseIndex]),
+                        .getName(snapshot.data['groups'][reverseIndex]),
                     userName: snapshot.data['fullName'],
                   );
                 },
