@@ -1,6 +1,8 @@
 import 'package:chat_app/helper/helper_function.dart';
+import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/group_tile.dart';
+import 'package:chat_app/widgets/show_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -50,6 +52,31 @@ class SearchController extends GetxController {
             },
           )
         : Container();
+  }
+
+  toggleGroupJoin(String userName, String groupId, String groupName) async {
+    isJoined = await DatabaseService(uid: user!.uid)
+        .toggleGroupJoin(groupId, userName, groupName);
+
+    if (isJoined) {
+      isJoined = !isJoined;
+      update();
+      showSnackBar(Colors.green, "Successfully joined the group", "Done !");
+      Future.delayed(Duration(seconds: 2), () {
+        Get.toNamed(
+          RoutesNames.chatScreen,
+          arguments: {
+            "groupId": groupId,
+            "groupName": groupName,
+            "userName": userName,
+          },
+        );
+      });
+    } else {
+      isJoined = !isJoined;
+      update();
+      showSnackBar(Colors.red, "Left the group $groupName", "Left !");
+    }
   }
 
   joinedOrNot(

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyTextFormField extends StatelessWidget {
-  final Icon icon;
+  final Icon? icon;
   final String text;
   Function(String)? onChanged;
   TextEditingController controller = new TextEditingController();
   MyTextFormField(
       {super.key,
-      required this.icon,
+      this.icon,
       required this.text,
       this.onChanged,
       required this.controller});

@@ -1,4 +1,7 @@
 import 'package:chat_app/controller/groups_controller.dart';
+import 'package:chat_app/controller/profile_controller.dart';
+import 'package:chat_app/controller/search_controller.dart';
+import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/member_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +24,7 @@ class GroupInfo extends StatefulWidget {
 
 class _GroupInfoState extends State<GroupInfo> {
   GroupsController groupsController = Get.find<GroupsController>();
+  SearchController searchController = Get.find<SearchController>();
 
   @override
   void initState() {
@@ -44,7 +48,40 @@ class _GroupInfoState extends State<GroupInfo> {
         title: Text("Group Info"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Exit",
+                      ),
+                      content: Text(
+                        "Are you sure you want to exit ?",
+                      ),
+                      actions: [
+                        IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: Icon(Icons.cancel),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            await searchController.toggleGroupJoin(
+                              groupsController.getName(widget.adminName),
+                              widget.groupId,
+                              widget.groupName,
+                            );
+                            Get.toNamed(RoutesNames.homeScreen);
+                          },
+                          icon: Icon(Icons.check),
+                        ),
+                      ],
+                    );
+                  });
+            },
             icon: Icon(Icons.exit_to_app),
           ),
         ],

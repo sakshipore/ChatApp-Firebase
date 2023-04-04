@@ -1,6 +1,10 @@
 import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
+import 'package:chat_app/widgets/chat_messages.dart';
+import 'package:chat_app/widgets/my_text_form_field.dart';
+import 'package:chat_app/widgets/send_message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -20,6 +24,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   GroupsController groupsController = Get.find<GroupsController>();
+  TextEditingController messageController = new TextEditingController();
 
   @override
   void initState() {
@@ -54,6 +59,53 @@ class _ChatScreenState extends State<ChatScreen> {
             },
             icon: Icon(
               Icons.info,
+            ),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: <Widget>[
+          ChatMessages(
+            userName: widget.userName,
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+              color: Colors.grey,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: MyTextFormField(
+                      text: "Message",
+                      controller: messageController,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12.w,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await groupsController.sendMessage(messageController, widget.userName, widget.groupId);
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: 50.w,
+                      decoration: BoxDecoration(
+                        color: Color(0xffee7b64),
+                        borderRadius: BorderRadius.circular(30.r),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.send,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

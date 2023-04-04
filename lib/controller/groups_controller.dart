@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class GroupsController extends GetxController {
   DatabaseService service =
       DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid);
-  
+
   bool isLoading = true;
   Stream? groups;
   Stream<QuerySnapshot>? chats;
@@ -20,6 +20,7 @@ class GroupsController extends GetxController {
   Future<void> getUserGroups() async {
     groups = await service.getUserGroups();
     // return groups;
+    isLoading = false;
     update();
   }
 
@@ -67,5 +68,20 @@ class GroupsController extends GetxController {
   Future getGroupMembers(String groupId) async {
     members = await service.getGroupMembers(groupId);
     update();
+  }
+
+  sendMessage(TextEditingController messageController, String userName,
+      String groupId) async {
+    if (messageController.text.isNotEmpty) {
+      Map<String, dynamic> chatMessageData = {
+        "message": messageController.text,
+        "sender": userName,
+        "time": DateTime.now().microsecondsSinceEpoch,
+      };
+
+      await service.sendMessage(groupId, chatMessageData);
+      update();
+      messageController.clear();
+    }
   }
 }

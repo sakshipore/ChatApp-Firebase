@@ -1,5 +1,6 @@
 import 'package:chat_app/controller/search_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
+import 'package:chat_app/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,9 @@ class GroupTile extends StatelessWidget {
             ),
           ),
           trailing: InkWell(
-            onTap: () {
+            onTap: () async {
+              await searchController.toggleGroupJoin(
+                  userName, groupId, groupName);
               
             },
             child: searchController.isJoined
