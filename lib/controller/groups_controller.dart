@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 class GroupsController extends GetxController {
   DatabaseService service =
       DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid);
+  
   bool isLoading = true;
   Stream? groups;
   Stream<QuerySnapshot>? chats;
