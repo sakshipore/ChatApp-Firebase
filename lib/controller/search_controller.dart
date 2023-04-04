@@ -17,6 +17,7 @@ class SearchController extends GetxController {
   String? userName;
   bool isJoined = false;
 
+  // TODO : Function not called any where
   Future<void> initiateSearchMethod() async {
     if (searchController.text.isNotEmpty) {
       isLoading = true;
@@ -33,7 +34,9 @@ class SearchController extends GetxController {
   }
 
   //! maybe repeated
-   groupList() {
+  // TODO : Widgets shouldn't be written in controller
+  // TODO : Have strict return type
+  groupList() {
     return hasUserSearched
         ? ListView.builder(
             shrinkWrap: true,
@@ -55,6 +58,7 @@ class SearchController extends GetxController {
         : Container();
   }
 
+  // TODO : Have strict return type
   toggleGroupJoin(String userName, String groupId, String groupName) async {
     isJoined = await DatabaseService(uid: user!.uid)
         .toggleGroupJoin(groupId, userName, groupName);
@@ -80,6 +84,7 @@ class SearchController extends GetxController {
     }
   }
 
+  // TODO : Have strict return type
   joinedOrNot(
       String userName, String groupId, String groupName, String admin) async {
     isJoined = await DatabaseService(uid: user!.uid)
@@ -87,6 +92,9 @@ class SearchController extends GetxController {
 
     update();
   }
+
+  //! ABOVE THREE METHODS ARE PART OF GROUP MODULE THEN THEY SHOULD BE IN GROUPS CONTROLLER
+  //! SEARCH CONTROLLER HAS NOTHING TO DO WITH THE GROUP
 
   Future getCurrentUserName() async {
     userName = await HelperFunction.getUserNameFromSF();

@@ -45,6 +45,7 @@ class AuthController extends GetxController {
     }
   }
 
+  // TODO : Remove commented code if not necessary
   Future<bool> login() async {
     try {
       isLoading = true;

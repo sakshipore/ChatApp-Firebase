@@ -56,6 +56,7 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () async {
+              // TODO : Why await
               await Get.toNamed(RoutesNames.profileScreen);
             },
             leading: Icon(Icons.account_circle),
@@ -88,6 +89,7 @@ class MyDrawer extends StatelessWidget {
                         IconButton(
                           onPressed: () async {
                             await profileController.logOut();
+                            // TODO : Writing this navigation line two times here as well as in logout function
                             Get.toNamed(RoutesNames.loginScreen);
                           },
                           icon: Icon(Icons.check),

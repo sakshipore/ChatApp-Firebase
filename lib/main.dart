@@ -32,6 +32,7 @@ void main() async {
   runApp(MyApp(isLoggedin: isLoggedin));
 }
 
+// TODO : No need of StatefulWidget
 class MyApp extends StatefulWidget {
   final bool isLoggedin;
   MyApp({

@@ -15,10 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // TODO : Need to shift profileController logic to Drawer Widget.
   ProfileController profileController = Get.put(ProfileController());
   GroupsController groupsController = Get.put(GroupsController());
   // Stream? groups;
-  String groupName = "";
+  // String groupName = "";
 
   @override
   void initState() {
@@ -28,43 +29,41 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GroupsController>(builder: (controller) {
       return Scaffold(
         //TODO: ADD CUSTOMIZE APP BAR
         appBar: AppBar(
-      centerTitle: true,
-      backgroundColor: Color(0xffee7b64),
-      // leading: Icon(
-      //   Icons.menu,
-      //   color: Colors.white,
-      // ),
-      toolbarHeight: 80.h,
-      title: Text(
-        "Groups",
-        style: TextStyle(
-          fontSize: 25.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Get.toNamed(
-              RoutesNames.searchScreen,
-            );
-          },
-          icon: Icon(
-            Icons.search,
-            color: Colors.white,
+          centerTitle: true,
+          backgroundColor: Color(0xffee7b64),
+          // leading: Icon(
+          //   Icons.menu,
+          //   color: Colors.white,
+          // ),
+          toolbarHeight: 80.h,
+          title: Text(
+            "Groups",
+            style: TextStyle(
+              fontSize: 25.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(
+                  RoutesNames.searchScreen,
+                );
+              },
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
         drawer: MyDrawer(),
         body: GroupList(
           groups: controller.groups,

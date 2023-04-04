@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 class GroupList extends StatelessWidget {
   Stream? groups;
   GroupList({super.key, required this.groups});
+  GroupsController groupsController = Get.find<GroupsController>();
 
   @override
   Widget build(BuildContext context) {
-    GroupsController groupsController = Get.find<GroupsController>();
     return StreamBuilder(
       stream: groups,
       builder: (context, AsyncSnapshot snapshot) {
@@ -22,8 +22,8 @@ class GroupList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   int reverseIndex = snapshot.data['groups'].length - index - 1;
                   return GroupTile(
-                    groupId:
-                        groupsController.getId(snapshot.data['groups'][reverseIndex]),
+                    groupId: groupsController
+                        .getId(snapshot.data['groups'][reverseIndex]),
                     groupName: groupsController
                         .getName(snapshot.data['groups'][reverseIndex]),
                     userName: snapshot.data['fullName'],
