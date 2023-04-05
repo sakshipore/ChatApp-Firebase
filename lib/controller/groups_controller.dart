@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/show_snackbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +10,9 @@ import 'package:get/get.dart';
 class GroupsController extends GetxController {
   DatabaseService service =
       DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid);
+  TextEditingController groupsController = TextEditingController();
+  bool isJoined = false;
+  User? user;
 
   bool isLoading = true;
   Stream? groups;
@@ -30,7 +33,8 @@ class GroupsController extends GetxController {
   }
 
   String getName(String res) {
-    return res.substring(0, res.indexOf("_") + 1);
+    return res.split("_").last;
+    // return res.substring(0, res.indexOf("_") + 1);
   }
 
   Future<void> setGroupName(
@@ -49,6 +53,39 @@ class GroupsController extends GetxController {
     }
   }
 
+  Future<void> toggleGroupJoin(String userName, String groupId, String groupName) async {
+    isJoined = await DatabaseService(uid: user!.uid)
+        .toggleGroupJoin(groupId, userName, groupName);
+
+    if (isJoined) {
+      isJoined = !isJoined;
+      update();
+      showSnackBar(Colors.green, "Successfully joined the group", "Done !");
+      Future.delayed(Duration(seconds: 2), () {
+        Get.toNamed(
+          RoutesNames.chatScreen,
+          arguments: {
+            "groupId": groupId,
+            "groupName": groupName,
+            "userName": userName,
+          },
+        );
+      });
+    } else {
+      isJoined = !isJoined;
+      update();
+      showSnackBar(Colors.red, "Left the group $groupName", "Left !");
+    }
+  }
+
+  Future<void> joinedOrNot(
+      String userName, String groupId, String groupName, String admin) async {
+    isJoined = await DatabaseService(uid: user!.uid)
+        .isUserJoined(groupName, groupId, userName);
+
+    update();
+  }
+
   // Future getChats(String groupId) async {
   //   isLoading = false;
   //   update();
@@ -58,11 +95,7 @@ class GroupsController extends GetxController {
   // }
 
   Future<void> getGroupAdmin(String groupId) async {
-    isLoading = false;
-    update();
     groupAdmin = await service.getGroupAdmin(groupId);
-    isLoading = true;
-    update();
   }
 
   Future<void> getGroupMembers(String groupId) async {
@@ -84,5 +117,4 @@ class GroupsController extends GetxController {
   //     messageController.clear();
   //   }
   // }
-  
 }

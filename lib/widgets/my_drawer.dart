@@ -1,8 +1,6 @@
 import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/profile_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
-import 'package:chat_app/service/auth_service.dart';
-import 'package:chat_app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,7 +10,6 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthService authService = AuthService();
     ProfileController profileController = Get.find<ProfileController>();
 
     return Drawer(
@@ -55,9 +52,8 @@ class MyDrawer extends StatelessWidget {
             title: Text("Groups", style: MyTextStyle.normalStyle),
           ),
           ListTile(
-            onTap: () async {
-              // TODO : Why await
-              await Get.toNamed(RoutesNames.profileScreen);
+            onTap: () {
+              Get.toNamed(RoutesNames.profileScreen);
             },
             leading: Icon(Icons.account_circle),
             selectedColor: Color(0xffee7b64),
@@ -89,8 +85,6 @@ class MyDrawer extends StatelessWidget {
                         IconButton(
                           onPressed: () async {
                             await profileController.logOut();
-                            // TODO : Writing this navigation line two times here as well as in logout function
-                            Get.toNamed(RoutesNames.loginScreen);
                           },
                           icon: Icon(Icons.check),
                         ),

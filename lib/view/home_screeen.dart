@@ -3,6 +3,8 @@ import 'package:chat_app/controller/profile_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/group_list.dart';
 import 'package:chat_app/widgets/my_drawer.dart';
+import 'package:chat_app/widgets/pop_up_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // TODO : Need to shift profileController logic to Drawer Widget.
-  ProfileController profileController = Get.put(ProfileController());
-  GroupsController groupsController = Get.put(GroupsController());
+  ProfileController profileController = Get.find<ProfileController>();
+  GroupsController groupsController = Get.find<GroupsController>();
   // Stream? groups;
   // String groupName = "";
 
@@ -69,9 +71,13 @@ class _HomeScreenState extends State<HomeScreen> {
           groups: controller.groups,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            //TODO: PASS USERNAME AND USERID AS PARAMETERS
-            // popUpDialog(context, groupName, );
+          onPressed: () async {
+            String userId = FirebaseAuth.instance.currentUser!.uid;
+            popUpDialog(
+              context,
+              profileController.userData['name'],
+              userId,
+            );
           },
           elevation: 0,
           backgroundColor: Color(0xffee7b64),

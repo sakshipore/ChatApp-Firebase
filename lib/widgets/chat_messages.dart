@@ -1,4 +1,3 @@
-import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/controller/message_controller.dart';
 import 'package:chat_app/widgets/message_tile.dart';
 import 'package:flutter/material.dart';

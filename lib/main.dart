@@ -32,23 +32,12 @@ void main() async {
   runApp(MyApp(isLoggedin: isLoggedin));
 }
 
-// TODO : No need of StatefulWidget
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   final bool isLoggedin;
   MyApp({
     super.key,
     required this.isLoggedin,
   });
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: widget.isLoggedin
+          initialRoute: isLoggedin
               ? RoutesNames.homeScreen
               : RoutesNames.loginScreen,
           getPages: AppRoutes.routes,

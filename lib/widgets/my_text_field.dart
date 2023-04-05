@@ -1,16 +1,19 @@
+import 'package:chat_app/controller/groups_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class MyTextField extends StatelessWidget {
-  String groupName;
-  MyTextField({super.key, required this.groupName});
+  MyTextField({super.key});
 
   @override
   Widget build(BuildContext context) {
+    GroupsController groupsController=Get.find<GroupsController>();
     return TextField(
-      onChanged: (value) {
-        groupName = value;
-      },
+      controller: groupsController.groupsController,
+      // onChanged: (value) {
+      //   groupsController.groupsController=value;
+      // },
       style: TextStyle(
         color: Colors.black,
       ),

@@ -24,7 +24,7 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   GroupsController groupsController = Get.find<GroupsController>();
-  MessageController messageController = Get.put(MessageController());
+  MessageController messageController = Get.find<MessageController>();
 
   @override
   void initState() {
@@ -41,80 +41,84 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<MessageController>(
       builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            elevation: 0,
-            title: Text(widget.groupName),
-            backgroundColor: Color(0xffee7b64),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Get.toNamed(
-                    RoutesNames.groupInfoScreen,
-                    arguments: {
-                      "groupId": widget.groupId,
-                      "groupName": widget.groupName,
-                      "adminName": groupsController.groupAdmin,
-                    },
-                  );
-                },
-                icon: Icon(
-                  Icons.info,
+        return controller.isChatLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Scaffold(
+                appBar: AppBar(
+                  centerTitle: true,
+                  elevation: 0,
+                  title: Text(widget.groupName),
+                  backgroundColor: Color(0xffee7b64),
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        Get.toNamed(
+                          RoutesNames.groupInfoScreen,
+                          arguments: {
+                            "groupId": widget.groupId,
+                            "groupName": widget.groupName,
+                            "adminName": groupsController.groupAdmin,
+                          },
+                        );
+                      },
+                      icon: Icon(
+                        Icons.info,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          body: Stack(
-            children: <Widget>[
-              ChatMessages(
-                userName: widget.userName,
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                width: MediaQuery.of(context).size.width,
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                  color: Colors.grey,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: MyTextFormField(
-                          text: "Message",
-                          controller: controller.messageController,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12.w,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          await controller.sendMessage(
-                              widget.userName, widget.groupId);
-                        },
-                        child: Container(
-                          height: 50.h,
-                          width: 50.w,
-                          decoration: BoxDecoration(
-                            color: Color(0xffee7b64),
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.send,
-                              color: Colors.white,
+                body: Stack(
+                  children: <Widget>[
+                    ChatMessages(
+                      userName: widget.userName,
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 10.h),
+                        color: Colors.grey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: MyTextFormField(
+                                text: "Message",
+                                controller: controller.messageController,
+                              ),
                             ),
-                          ),
+                            SizedBox(
+                              width: 12.w,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                await controller.sendMessage(
+                                    widget.userName, widget.groupId);
+                              },
+                              child: Container(
+                                height: 50.h,
+                                width: 50.w,
+                                decoration: BoxDecoration(
+                                  color: Color(0xffee7b64),
+                                  borderRadius: BorderRadius.circular(30.r),
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.send,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        );
+              );
       },
     );
   }

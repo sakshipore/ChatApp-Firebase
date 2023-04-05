@@ -10,8 +10,7 @@ import 'package:get/get.dart';
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
 
-  // TODO : No need to use Get.put() again. Login screen pe get.put kara hai so use Get.find() here.
-  final authController = Get.put(AuthController());
+  AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {

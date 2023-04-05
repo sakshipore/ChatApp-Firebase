@@ -1,6 +1,4 @@
-import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/controller/search_controller.dart';
-import 'package:chat_app/widgets/my_text_field.dart';
 import 'package:chat_app/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +9,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SearchController searchController = Get.put(SearchController());
+    // SearchController searchController = Get.find<SearchController>();
 
     return GetBuilder<SearchController>(
       builder: (controller) {

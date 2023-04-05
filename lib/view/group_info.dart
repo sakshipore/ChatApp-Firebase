@@ -24,7 +24,6 @@ class GroupInfo extends StatefulWidget {
 class _GroupInfoState extends State<GroupInfo> {
   GroupsController groupsController = Get.find<GroupsController>();
   SearchController searchController = Get.find<SearchController>();
-
   @override
   void initState() {
     groupsController.getGroupMembers(widget.groupId);
@@ -39,107 +38,105 @@ class _GroupInfoState extends State<GroupInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GroupsController>(      
-      builder: (controller) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Color(0xffee7b64),
-            title: Text("Group Info"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                      barrierDismissible: false,
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text(
-                            "Exit",
-                          ),
-                          content: Text(
-                            "Are you sure you want to exit ?",
-                          ),
-                          actions: [
-                            IconButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: Icon(Icons.cancel),
-                            ),
-                            IconButton(
-                              onPressed: () async {
-                                await searchController.toggleGroupJoin(
-                                  controller.getName(widget.adminName),
-                                  widget.groupId,
-                                  widget.groupName,
-                                );
-                                Get.toNamed(RoutesNames.homeScreen);
-                              },
-                              icon: Icon(Icons.check),
-                            ),
-                          ],
-                        );
-                      });
-                },
-                icon: Icon(Icons.exit_to_app),
-              ),
-            ],
-          ),
-          body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.r),
-                    color: Color(0xffee7b64).withOpacity(0.2),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 30.r,
-                        backgroundColor: Color(0xffee7b64),
-                        child: Text(
-                          widget.groupName.substring(0, 1).toUpperCase(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
+    return GetBuilder<GroupsController>(builder: (controller) {
+      return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Color(0xffee7b64),
+          title: Text("Group Info"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Exit",
                         ),
-                      ),
-                      SizedBox(
-                        width: 20.w,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Group: ${widget.groupName}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                            ),
+                        content: Text(
+                          "Are you sure you want to exit ?",
+                        ),
+                        actions: [
+                          IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: Icon(Icons.cancel),
                           ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Text(
-                            "Admin: ${widget.adminName}",
+                          IconButton(
+                            onPressed: () async {
+                              await controller.toggleGroupJoin(
+                                controller.getName(widget.adminName),
+                                widget.groupId,
+                                widget.groupName,
+                              );
+                              Get.toNamed(RoutesNames.homeScreen);
+                            },
+                            icon: Icon(Icons.check),
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                ),
-                MemberList(),
-              ],
+                      );
+                    });
+              },
+              icon: Icon(Icons.exit_to_app),
             ),
+          ],
+        ),
+        body: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.r),
+                  color: Color(0xffee7b64).withOpacity(0.2),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 30.r,
+                      backgroundColor: Color(0xffee7b64),
+                      child: Text(
+                        widget.groupName.substring(0, 1).toUpperCase(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20.w,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Group: ${widget.groupName}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        Text(
+                          "Admin: ${widget.adminName}",
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              MemberList(),
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

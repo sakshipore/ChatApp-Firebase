@@ -1,6 +1,5 @@
-import 'package:chat_app/controller/search_controller.dart';
+import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
-import 'package:chat_app/widgets/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,7 @@ class GroupTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SearchController searchController = Get.find<SearchController>();
+    GroupsController groupsController = Get.find<GroupsController>();
 
     return GestureDetector(
       onTap: () {
@@ -62,11 +61,10 @@ class GroupTile extends StatelessWidget {
           ),
           trailing: InkWell(
             onTap: () async {
-              await searchController.toggleGroupJoin(
+              await groupsController.toggleGroupJoin(
                   userName, groupId, groupName);
-              
             },
-            child: searchController.isJoined
+            child: groupsController.isJoined
                 ? Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),

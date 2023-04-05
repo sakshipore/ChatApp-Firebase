@@ -1,12 +1,10 @@
 import 'package:chat_app/controller/groups_controller.dart';
-import 'package:chat_app/service/database_service.dart';
 import 'package:chat_app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 popUpDialog(
-    BuildContext context, String groupName, String userName, String userId) {
+    BuildContext context, String userName, String userId) {
   GroupsController groupsController = Get.find<GroupsController>();
   bool isLoading = false;
   showDialog(
@@ -28,7 +26,7 @@ popUpDialog(
                         color: Color(0xffee7b64),
                       ),
                     )
-                  : MyTextField(groupName: groupName)
+                  : MyTextField(),
             ],
           ),
           actions: [
@@ -43,9 +41,9 @@ popUpDialog(
             ),
             ElevatedButton(
               onPressed: () async {
-                if (groupName != "") {
+                if (groupsController.groupsController.text != "") {
                   await groupsController.setGroupName(
-                      userName, userId, groupName);
+                      userName, userId, groupsController.groupsController.text);
                 }
               },
               style: ElevatedButton.styleFrom(
