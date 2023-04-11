@@ -17,6 +17,7 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      obscureText: text == "Password" ? true : false,
       onChanged: (value) {
         if (onChanged != null) {
           onChanged!(value);

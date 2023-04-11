@@ -24,7 +24,8 @@ class AuthController extends GetxController {
           emailController.text.trim(),
           passwordController.text);
       if (user != null) {
-        // saving the shared preference data
+        
+        //? saving the shared preference data
         await HelperFunction.saveUserLoggedInStatus(true);
         await HelperFunction.saveUserEmailSF(emailController.text);
         await HelperFunction.saveUserNameSF(fullNameController.text);
@@ -45,7 +46,6 @@ class AuthController extends GetxController {
     }
   }
 
-  // TODO : Remove commented code if not necessary
   Future<bool> login() async {
     try {
       isLoading = true;
@@ -56,22 +56,19 @@ class AuthController extends GetxController {
       if (user != null) {
         await HelperFunction.saveUserLoggedInStatus(true);
         await HelperFunction.saveUserEmailSF(user.email!);
-        //TODO: NAME NOT BEING DISPLAYED
-        // await HelperFunction.saveUserNameSF(user.);
-        // isLoading = false;
-        // update();
         Get.toNamed(RoutesNames.homeScreen);
         return true;
       } else {
-        // isLoading = false;
-        // update();
+        showSnackBar(
+          Colors.deepPurple,
+          "Please login to access the features of the application",
+          "Login needed !",
+        );
         return false;
       }
     } catch (e) {
       log(e.toString());
       showSnackBar(Colors.red, e.toString(), "Login failed");
-      // isLoading = false;
-      // update();
       return false;
     } finally {
       isLoading = false;
