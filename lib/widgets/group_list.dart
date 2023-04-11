@@ -39,7 +39,7 @@ class GroupList extends StatelessWidget {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Color(0xffee7b64),
+              color: Colors.deepPurple,
             ),
           );
         }

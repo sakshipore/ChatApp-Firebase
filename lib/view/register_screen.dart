@@ -31,12 +31,12 @@ class RegisterScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Text("Groupie", style: MyTextStyle.headingStyle),
+                        Text("Groupie", style: MyTextStyle.headingTextStyle),
                         SizedBox(
                           height: 10.h,
                         ),
                         Text("Create your account now to chat and explore",
-                            style: MyTextStyle.normalStyle),
+                            style: MyTextStyle.normalTextStyle),
                         SizedBox(
                           height: 40.h,
                         ),
@@ -102,7 +102,7 @@ class RegisterScreen extends StatelessWidget {
                             Get.toNamed(RoutesNames.loginScreen);
                           },
                           child: Text("Already have an account? Login now",
-                              style: MyTextStyle.normalStyle),
+                              style: MyTextStyle.normalTextStyle),
                         ),
                       ],
                     ),

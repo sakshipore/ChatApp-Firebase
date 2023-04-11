@@ -1,42 +1,62 @@
-import 'package:chat_app/routes/routes_names.dart';
+import 'package:chat_app/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({super.key});
+class MyAppBar extends StatefulWidget with PreferredSizeWidget {
+  final String text;
+  final VoidCallback leadingIconOnTap;
+  final IconData leadingIcon;
+  VoidCallback? trailingIconOnTap;
+  IconData? trailingIcon;
+  MyAppBar({
+    super.key,
+    required this.text,
+    required this.leadingIconOnTap,
+    required this.leadingIcon,
+    this.trailingIconOnTap,
+    this.trailingIcon,
+  });
 
   @override
+  State<MyAppBar> createState() => _MyAppBarState();
+
+  @override
+  Size get preferredSize => Size(360.w, 50.h);
+}
+
+class _MyAppBarState extends State<MyAppBar> {
+  @override
   Widget build(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      backgroundColor: Color(0xffee7b64),
-      // leading: Icon(
-      //   Icons.menu,
-      //   color: Colors.white,
-      // ),
-      toolbarHeight: 80.h,
-      title: Text(
-        "Groups",
-        style: TextStyle(
-          fontSize: 25.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
+    return Container(
+      height: 75.h,
+      width: 360.w,
+      color: Colors.deepPurple,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: widget.leadingIconOnTap,
+              child: Icon(
+                widget.leadingIcon,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              widget.text,
+              style: MyTextStyle.headingTextStyle,
+            ),
+            InkWell(
+              onTap: widget.trailingIconOnTap,
+              child: Icon(
+                widget.trailingIcon,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Get.toNamed(
-              RoutesNames.searchScreen,
-            );
-          },
-          icon: Icon(
-            Icons.search,
-            color: Colors.white,
-          ),
-        ),
-      ],
     );
   }
 }

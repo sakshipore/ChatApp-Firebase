@@ -30,12 +30,12 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Text("Groupie", style: MyTextStyle.headingStyle),
+                        Text("Groupie", style: MyTextStyle.headingTextStyle),
                         SizedBox(
                           height: 10.h,
                         ),
                         Text("Login now to see what they are talking",
-                            style: MyTextStyle.normalStyle),
+                            style: MyTextStyle.normalTextStyle),
                         SizedBox(
                           height: 40.h,
                         ),
@@ -90,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                             );
                           },
                           child: Text("Don't have an account? Register here",
-                              style: MyTextStyle.normalStyle),
+                              style: MyTextStyle.normalTextStyle),
                         ),
                       ],
                     ),

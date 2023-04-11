@@ -20,13 +20,13 @@ class MyTextField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xffee7b64),
+            color: Colors.deepPurple,
           ),
           borderRadius: BorderRadius.circular(20.r),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xffee7b64),
+            color: Colors.deepPurple,
           ),
           borderRadius: BorderRadius.circular(20.r),
         ),

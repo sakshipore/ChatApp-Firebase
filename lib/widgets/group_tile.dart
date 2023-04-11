@@ -37,7 +37,7 @@ class GroupTile extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             radius: 30.r,
-            backgroundColor: Color(0xffee7b64),
+            backgroundColor: Colors.deepPurple,
             child: Text(
               groupName.substring(0, 1).toUpperCase(),
               textAlign: TextAlign.center,
@@ -86,7 +86,7 @@ class GroupTile extends StatelessWidget {
                 : Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      color: Color(0xffee7b64),
+                      color: Colors.deepPurple,
                     ),
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),

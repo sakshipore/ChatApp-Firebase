@@ -24,19 +24,13 @@ class MyDrawer extends StatelessWidget {
           SizedBox(
             height: 15.h,
           ),
-          // Center(
-          //   child: Text(
-          //                           profileController.userData['email'],
-          //     style: MyTextStyle.normalStyle,
-          //   ),
-          // ),
           SizedBox(
             height: 10.h,
           ),
           Center(
             child: Text(
               profileController.userData['email'],
-              style: MyTextStyle.normalStyle,
+              style: MyTextStyle.normalTextStyle,
             ),
           ),
           SizedBox(
@@ -45,59 +39,61 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             onTap: () {},
             leading: Icon(Icons.group),
-            selectedColor: Color(0xffee7b64),
+            //TODO: SELECTED SHOULD CHANGE
+            selectedColor: Colors.deepPurple,
             selected: true,
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-            title: Text("Groups", style: MyTextStyle.normalStyle),
+            title: Text("Groups", style: MyTextStyle.normalTextStyle),
           ),
           ListTile(
             onTap: () {
               Get.toNamed(RoutesNames.profileScreen);
             },
             leading: Icon(Icons.account_circle),
-            selectedColor: Color(0xffee7b64),
+            selectedColor: Colors.deepPurple,
             // selected: true,
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-            title: Text("Profile", style: MyTextStyle.normalStyle),
+            title: Text("Profile", style: MyTextStyle.normalTextStyle),
           ),
           ListTile(
             onTap: () {
               showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text(
-                        "Logout",
+                barrierDismissible: false,
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(
+                      "Logout",
+                    ),
+                    content: Text(
+                      "Are you sure you want to logout ?",
+                    ),
+                    actions: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(Icons.cancel),
                       ),
-                      content: Text(
-                        "Are you sure you want to logout ?",
+                      IconButton(
+                        onPressed: () async {
+                          await profileController.logOut();
+                        },
+                        icon: Icon(Icons.check),
                       ),
-                      actions: [
-                        IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(Icons.cancel),
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            await profileController.logOut();
-                          },
-                          icon: Icon(Icons.check),
-                        ),
-                      ],
-                    );
-                  });
+                    ],
+                  );
+                },
+              );
             },
             leading: Icon(Icons.exit_to_app),
-            selectedColor: Color(0xffee7b64),
+            selectedColor: Colors.deepPurple,
             // selected: true,
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-            title: Text("LogOut", style: MyTextStyle.normalStyle),
+            title: Text("LogOut", style: MyTextStyle.normalTextStyle),
           ),
         ],
       ),

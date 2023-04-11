@@ -27,12 +27,12 @@ class MyTextFormField extends StatelessWidget {
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xffee7b64),
+            color: Colors.deepPurple,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Color(0xffee7b64),
+            color: Colors.deepPurple,
           ),
         ),
         hintText: text,

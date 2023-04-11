@@ -27,7 +27,7 @@ class MemberList extends StatelessWidget {
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 30.r,
-                        backgroundColor: Color(0xffee7b64),
+                        backgroundColor: Colors.deepPurple,
                         child: Text(
                           groupsController
                               .getName(snapshot.data['members'][index])
@@ -68,7 +68,7 @@ class MemberList extends StatelessWidget {
         } else {
           return Center(
             child: CircularProgressIndicator(
-              color: Color(0xffee7b64),
+              color: Colors.deepPurple,
             ),
           );
         }

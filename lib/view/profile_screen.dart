@@ -66,11 +66,11 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Full Name",
-                      style: MyTextStyle.normalStyle,
+                      style: MyTextStyle.normalTextStyle,
                     ),
                     Text(
                       profileController.userData['name'],
-                      style: MyTextStyle.normalStyle,
+                      style: MyTextStyle.normalTextStyle,
                     ),
                   ],
                 ),
@@ -82,11 +82,11 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Email",
-                      style: MyTextStyle.normalStyle,
+                      style: MyTextStyle.normalTextStyle,
                     ),
                     Text(
                       profileController.userData['email'],
-                      style: MyTextStyle.normalStyle,
+                      style: MyTextStyle.normalTextStyle,
                     ),
                   ],
                 ),

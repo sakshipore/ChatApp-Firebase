@@ -23,7 +23,7 @@ popUpDialog(
               isLoading == true
                   ? Center(
                       child: CircularProgressIndicator(
-                        color: Color(0xffee7b64),
+                        color: Colors.deepPurple,
                       ),
                     )
                   : MyTextField(),
@@ -47,7 +47,7 @@ popUpDialog(
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xffee7b64),
+                backgroundColor: Colors.deepPurple,
               ),
               child: Text("CREATE"),
             ),

@@ -47,10 +47,12 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: isLoggedin
-              ? RoutesNames.homeScreen
-              : RoutesNames.loginScreen,
+          initialRoute:
+              isLoggedin ? RoutesNames.homeScreen : RoutesNames.loginScreen,
           getPages: AppRoutes.routes,
+          theme: ThemeData(
+            fontFamily: "Poppins",
+          ),
         );
       },
     );
