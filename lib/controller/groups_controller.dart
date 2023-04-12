@@ -13,7 +13,6 @@ class GroupsController extends GetxController {
   TextEditingController groupsController = TextEditingController();
   bool isJoined = false;
   User? user;
-
   bool isLoading = true;
   Stream? groups;
   // Stream<QuerySnapshot>? chats;
@@ -53,7 +52,8 @@ class GroupsController extends GetxController {
     }
   }
 
-  Future<void> toggleGroupJoin(String userName, String groupId, String groupName) async {
+  Future<void> toggleGroupJoin(
+      String userName, String groupId, String groupName) async {
     isJoined = await DatabaseService(uid: user!.uid)
         .toggleGroupJoin(groupId, userName, groupName);
 

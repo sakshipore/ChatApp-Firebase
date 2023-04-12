@@ -14,12 +14,22 @@ class ProfileController extends GetxController {
   bool isLoading = true;
 
   Future<void> gettingUserData() async {
-    String? name = await HelperFunction.getUserNameFromSF();
-    String? email = await HelperFunction.getUserEmailFromSF();
-    userData = {
-      "name": name,
-      "email": email,
-    };
+    try {
+      isLoading = true;
+      update();
+      String? name = await HelperFunction.getUserNameFromSF();
+      String? email = await HelperFunction.getUserEmailFromSF();
+      userData = {
+        "name": name,
+        "email": email,
+      };
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      isLoading = false;
+      update();
+    }
+
     isLoading = false;
     update();
   }

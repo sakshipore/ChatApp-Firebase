@@ -18,58 +18,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TODO : Need to shift profileController logic to Drawer Widget.
-  ProfileController profileController = Get.find<ProfileController>();
   GroupsController groupsController = Get.find<GroupsController>();
-  // Stream? groups;
-  // String groupName = "";
+  ProfileController profileController=Get.find<ProfileController>();
 
   @override
   void initState() {
-    profileController.gettingUserData();
     groupsController.getUserGroups();
-
+    profileController.gettingUserData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GroupsController>(builder: (controller) {
-      return Scaffold(
-        appBar: MyAppBar(
-          //TODO: NOT WORKING
-          leadingIconOnTap: () {
-            MyDrawer();
-          },
-          leadingIcon: Icons.menu,
-          text: "Groups",
-          trailingIconOnTap: () {
-            Get.toNamed(RoutesNames.searchScreen);
-          },
-          trailingIcon: Icons.search,
-        ),
-        drawer: MyDrawer(),
-        body: GroupList(
-          groups: controller.groups,
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            String userId = FirebaseAuth.instance.currentUser!.uid;
-            popUpDialog(
-              context,
-              profileController.userData['name'],
-              userId,
-            );
-          },
-          elevation: 0,
-          backgroundColor: Color(0xffee7b64),
-          child: Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 30.sp,
+    return GetBuilder<GroupsController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: MyAppBar(
+            //TODO: NOT WORKING
+            leadingIconOnTap: () {
+              MyDrawer();
+            },
+            leadingIcon: Icons.menu,
+            text: "Groups",
+            trailingIconOnTap: () {
+              Get.toNamed(RoutesNames.searchScreen);
+            },
+            trailingIcon: Icons.search,
           ),
-        ),
-      );
-    });
+          drawer: MyDrawer(),
+          body: GroupList(
+            groups: controller.groups,
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+              String userId = FirebaseAuth.instance.currentUser!.uid;
+              popUpDialog(
+                context,
+                userId,
+              );
+            },
+            elevation: 0,
+            backgroundColor: Colors.deepPurple,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30.sp,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

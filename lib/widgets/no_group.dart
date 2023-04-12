@@ -1,3 +1,4 @@
+import 'package:chat_app/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +25,7 @@ class NoGroup extends StatelessWidget {
           ),
           Text(
             "You've not joined any group. Tap on the add icon to create a group or also search from top search button",
+            style: MyTextStyle.normalTextStyle,
           ),
         ],
       ),
