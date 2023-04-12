@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -12,9 +14,16 @@ class MessageController extends GetxController {
   TextEditingController messageController = new TextEditingController();
 
   Future<void> getChats(String groupId) async {
-    chats = await service.getChats(groupId);
-    isChatLoading = false;
-    update();
+    try {
+      isChatLoading = true;
+      update();
+      chats = await service.getChats(groupId);
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      isChatLoading = false;
+      update();
+    }
   }
 
   Future<void> sendMessage(String userName, String groupId) async {

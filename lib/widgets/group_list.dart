@@ -1,5 +1,6 @@
 import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/widgets/group_tile.dart';
+import 'package:chat_app/widgets/group_tile_home_screen.dart';
 import 'package:chat_app/widgets/no_group.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class GroupList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       int reverseIndex =
                           snapshot.data['groups'].length - index - 1;
-                      return GroupTile(
+                      return GroupTileHomeScreen(
                         groupId: controller.getId(snapshot.data['groups'][reverseIndex]),
                         groupName: controller.getName(snapshot.data['groups'][reverseIndex]),
                         userName: snapshot.data['fullName'],

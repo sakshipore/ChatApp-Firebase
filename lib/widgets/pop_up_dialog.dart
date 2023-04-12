@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 popUpDialog(BuildContext context, String userId) {
-  GroupsController groupsController = Get.find<GroupsController>();
   ProfileController profileController = Get.find<ProfileController>();
 
   showDialog(
@@ -45,12 +44,13 @@ popUpDialog(BuildContext context, String userId) {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      if (groupsController.groupsController.text != "") {
-                        await groupsController.setGroupName(
+                      if (controller.groupsController.text != "") {
+                        await controller.setGroupName(
                           profileController.userData['name'],
                           userId,
-                          groupsController.groupsController.text,
+                          controller.groupsController.text,
                         );
+                        controller.groupsController.text = "";
                       }
                     },
                     style: ElevatedButton.styleFrom(

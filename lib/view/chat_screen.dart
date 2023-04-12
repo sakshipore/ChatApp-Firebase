@@ -2,6 +2,7 @@ import 'package:chat_app/controller/groups_controller.dart';
 import 'package:chat_app/controller/message_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/chat_messages.dart';
+import 'package:chat_app/widgets/my_appbar.dart';
 import 'package:chat_app/widgets/my_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,43 +34,63 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   getChatAndGroupAdmin() async {
-    await groupsController.getGroupAdmin(widget.groupId);
     await messageController.getChats(widget.groupId);
+    await groupsController.getGroupAdmin(widget.groupId);
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MessageController>(
       builder: (controller) {
-        return controller.isChatLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Scaffold(
-                appBar: AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  title: Text(widget.groupName),
-                  backgroundColor: Color(0xffee7b64),
-                  actions: [
-                    IconButton(
-                      onPressed: () {
-                        Get.toNamed(
-                          RoutesNames.groupInfoScreen,
-                          arguments: {
-                            "groupId": widget.groupId,
-                            "groupName": widget.groupName,
-                            "adminName": groupsController.groupAdmin,
-                          },
-                        );
-                      },
-                      icon: Icon(
-                        Icons.info,
-                      ),
-                    ),
-                  ],
-                ),
-                body: Stack(
+        return Scaffold(
+          appBar: MyAppBar(
+            text: widget.groupName,
+            leadingIconOnTap: () {
+              Get.back();
+            },
+            leadingIcon: Icons.arrow_back,
+            trailingIcon: Icons.info,
+            trailingIconOnTap: () {
+              Get.toNamed(
+                RoutesNames.groupInfoScreen,
+                arguments: {
+                  "groupId": widget.groupId,
+                  "groupName": widget.groupName,
+                  "adminName": groupsController.groupAdmin,
+                },
+              );
+            },
+          ),
+          // appBar: AppBar(
+          //   centerTitle: true,
+          //   elevation: 0,
+          //   title: Text(widget.groupName),
+          //   backgroundColor: Color(0xffee7b64),
+          //   actions: [
+          //     IconButton(
+          //       onPressed: () {
+          //         Get.toNamed(
+          //           RoutesNames.groupInfoScreen,
+          //           arguments: {
+          //             "groupId": widget.groupId,
+          //             "groupName": widget.groupName,
+          //             "adminName": groupsController.groupAdmin,
+          //           },
+          //         );
+          //       },
+          //       icon: Icon(
+          //         Icons.info,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          body: controller.isChatLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.deepPurple,
+                  ),
+                )
+              : Stack(
                   children: <Widget>[
                     ChatMessages(
                       userName: widget.userName,
@@ -118,7 +139,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ],
                 ),
-              );
+        );
       },
     );
   }
