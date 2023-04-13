@@ -56,6 +56,7 @@ class AppRoutes {
         groupName: Get.arguments["groupName"],
         adminName: Get.arguments["adminName"],
       ),
+      binding: HomeBinding(),
     ),
   ];
 }

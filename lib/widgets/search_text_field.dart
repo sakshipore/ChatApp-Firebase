@@ -1,21 +1,30 @@
+import 'package:chat_app/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchTextField extends StatelessWidget {
   final TextEditingController controller;
-  SearchTextField({super.key, required this.controller});
+  final String text;
+  SearchTextField({super.key, required this.controller, required this.text,});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: "Search groups...",
-        hintStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 16.sp,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.deepPurple,
+          ),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.deepPurple,
+          ),
+        ),
+        hintText: text,
+        hintStyle: MyTextStyle.normalTextStyle,
       ),
     );
   }

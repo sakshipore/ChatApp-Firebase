@@ -23,17 +23,24 @@ class SearchScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
+            SizedBox(
+              height: 10.h,
+            ),
             Container(
-              color: Color(0xffee7b64),
+              // color: Color(0xffee7b64),
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
               child: Row(
                 children: [
                   Expanded(
                     child: SearchTextField(
-                        controller: controller.searchController),
+                      text: "Search groups",
+                      controller: controller.searchController,
+                    ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      await controller.initiateSearchMethod();
+                    },
                     child: Container(
                       width: 40.w,
                       height: 40.h,
@@ -43,7 +50,7 @@ class SearchScreen extends StatelessWidget {
                       ),
                       child: Icon(
                         Icons.search,
-                        color: Colors.white,
+                        color: Colors.deepPurple,
                       ),
                     ),
                   ),

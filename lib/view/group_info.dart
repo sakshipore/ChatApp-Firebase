@@ -1,5 +1,5 @@
+import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/groups_controller.dart';
-import 'package:chat_app/controller/search_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
 import 'package:chat_app/widgets/member_list.dart';
 import 'package:flutter/material.dart';
@@ -23,32 +23,30 @@ class GroupInfo extends StatefulWidget {
 
 class _GroupInfoState extends State<GroupInfo> {
   GroupsController groupsController = Get.find<GroupsController>();
-  SearchController searchController = Get.find<SearchController>();
+
   @override
   void initState() {
     groupsController.getGroupMembers(widget.groupId);
-    // getChatAndGroupAdmin();
     super.initState();
   }
 
-  // getChatAndGroupAdmin() async {
-  //   await groupsController.getChats(widget.groupId);
-  //   await groupsController.getGroupAdmin(widget.groupId);
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GroupsController>(builder: (controller) {
-      return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Color(0xffee7b64),
-          title: Text("Group Info"),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showDialog(
+    return GetBuilder<GroupsController>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: Colors.deepPurple,
+            title: Text(
+              "Group Info",
+              style: MyTextStyle.headingTextStyle,
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showDialog(
                     barrierDismissible: false,
                     context: context,
                     builder: (context) {
@@ -79,64 +77,62 @@ class _GroupInfoState extends State<GroupInfo> {
                           ),
                         ],
                       );
-                    });
-              },
-              icon: Icon(Icons.exit_to_app),
-            ),
-          ],
-        ),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.r),
-                  color: Color(0xffee7b64).withOpacity(0.2),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 30.r,
-                      backgroundColor: Color(0xffee7b64),
-                      child: Text(
-                        widget.groupName.substring(0, 1).toUpperCase(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Group: ${widget.groupName}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          "Admin: ${widget.adminName}",
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                    },
+                  );
+                },
+                icon: Icon(Icons.exit_to_app),
               ),
-              MemberList(),
             ],
           ),
-        ),
-      );
-    });
+          body: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            child: Column(
+              children: [
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.r),
+                    color: Colors.deepPurple.withOpacity(0.2),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 30.r,
+                        backgroundColor: Colors.deepPurple,
+                        child: Text(
+                          widget.groupName.substring(0, 1).toUpperCase(),
+                          style: MyTextStyle.headingTextStyle,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Group: ${widget.groupName}",
+                            style: MyTextStyle.normalTextStyle,
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            "Admin: ${widget.adminName.split("_").last}",
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                MemberList(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
