@@ -19,6 +19,7 @@ class SearchScreen extends StatelessWidget {
           leadingIconOnTap: () {
             Get.back();
           },
+          containsDrawer: false,
           leadingIcon: Icons.arrow_back,
         ),
         body: Column(

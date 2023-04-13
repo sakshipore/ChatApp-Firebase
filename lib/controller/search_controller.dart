@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/helper/helper_function.dart';
 import 'package:chat_app/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,7 +14,6 @@ class SearchController extends GetxController {
   User? user;
   String? userName;
 
-  // TODO : Function not called any where
   Future<void> initiateSearchMethod() async {
     if (searchController.text.isNotEmpty) {
       isLoading = true;

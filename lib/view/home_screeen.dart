@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   GroupsController groupsController = Get.find<GroupsController>();
-  ProfileController profileController=Get.find<ProfileController>();
+  ProfileController profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
@@ -34,10 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (controller) {
         return Scaffold(
           appBar: MyAppBar(
-            //TODO: NOT WORKING
-            leadingIconOnTap: () {
-              MyDrawer();
-            },
+            // leadingIconOnTap: () {
+            //! It's working as it is now if you swipe to left
+            //! Custom app bar hai so just call karake ni hoga
+            // Scaffold.of(context).openDrawer();
+            //! This mehtod open up the drawer that u have specified in line 50 but this isn't working when called like this.
+            // },
             leadingIcon: Icons.menu,
             text: "Groups",
             trailingIconOnTap: () {

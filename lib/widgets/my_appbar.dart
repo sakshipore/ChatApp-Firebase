@@ -4,17 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final String text;
-  final VoidCallback leadingIconOnTap;
+  final VoidCallback? leadingIconOnTap;
   final IconData leadingIcon;
-  VoidCallback? trailingIconOnTap;
-  IconData? trailingIcon;
+  final bool containsDrawer;
+  final VoidCallback? trailingIconOnTap;
+  final IconData? trailingIcon;
   MyAppBar({
     super.key,
     required this.text,
-    required this.leadingIconOnTap,
+    this.leadingIconOnTap,
     required this.leadingIcon,
     this.trailingIconOnTap,
     this.trailingIcon,
+    this.containsDrawer = true,
   });
 
   @override
@@ -37,7 +39,15 @@ class _MyAppBarState extends State<MyAppBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: widget.leadingIconOnTap,
+              onTap: () {
+                if (!widget.containsDrawer) {
+                  if (widget.leadingIconOnTap != null) {
+                    widget.leadingIconOnTap!();
+                  }
+                } else {
+                  Scaffold.of(context).openDrawer();
+                }
+              },
               child: Icon(
                 widget.leadingIcon,
                 color: Colors.white,
