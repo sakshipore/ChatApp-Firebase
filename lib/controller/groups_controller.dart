@@ -15,15 +15,20 @@ class GroupsController extends GetxController {
   User? user;
   bool isLoading = true;
   Stream? groups;
-  // Stream<QuerySnapshot>? chats;
   String? groupAdmin;
   Stream? members;
 
   Future<void> getUserGroups() async {
-    groups = await service.getUserGroups();
-    // return groups;
-    isLoading = false;
-    update();
+    try {
+      isLoading = true;
+      update();
+      groups = await service.getUserGroups();
+    } catch (e) {
+      log(e.toString());
+    } finally {
+      isLoading = false;
+      update();
+    }
   }
 
   // String manipulation
@@ -33,7 +38,6 @@ class GroupsController extends GetxController {
 
   String getName(String res) {
     return res.split("_").last;
-    // return res.substring(0, res.indexOf("_") + 1);
   }
 
   Future<void> setGroupName(
@@ -86,14 +90,6 @@ class GroupsController extends GetxController {
     update();
   }
 
-  // Future getChats(String groupId) async {
-  //   isLoading = false;
-  //   update();
-  //   chats = await service.getChats(groupId);
-  //   isLoading = true;
-  //   update();
-  // }
-
   Future<void> getGroupAdmin(String groupId) async {
     groupAdmin = await service.getGroupAdmin(groupId);
   }
@@ -102,19 +98,4 @@ class GroupsController extends GetxController {
     members = await service.getGroupMembers(groupId);
     update();
   }
-
-  // sendMessage(TextEditingController messageController, String userName,
-  //     String groupId) async {
-  //   if (messageController.text.isNotEmpty) {
-  //     Map<String, dynamic> chatMessageData = {
-  //       "message": messageController.text,
-  //       "sender": userName,
-  //       "time": DateTime.now().microsecondsSinceEpoch,
-  //     };
-
-  //     await service.sendMessage(groupId, chatMessageData);
-  //     update();
-  //     messageController.clear();
-  //   }
-  // }
 }

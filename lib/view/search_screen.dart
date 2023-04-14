@@ -58,6 +58,12 @@ class SearchScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20.h,
+            ), 
+            // ListView.builder(
+            //   itemCount: controller.searchSnapshot.length,
+            // ),
           ],
         ),
       );

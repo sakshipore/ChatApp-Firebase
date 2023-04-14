@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/text_style.dart';
 import 'package:chat_app/controller/profile_controller.dart';
 import 'package:chat_app/routes/routes_names.dart';
+import 'package:chat_app/widgets/my_appbar.dart';
 import 'package:chat_app/widgets/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,37 +15,14 @@ class ProfileScreen extends StatelessWidget {
     ProfileController profileController = Get.find<ProfileController>();
 
     return Scaffold(
-      //TODO: ADD CUSTOMIZE APPBAR
-      appBar: AppBar(
-      centerTitle: true,
-      backgroundColor: Color(0xffee7b64),
-      // leading: Icon(
-      //   Icons.menu,
-      //   color: Colors.white,
-      // ),
-      toolbarHeight: 80.h,
-      title: Text(
-        "Groups",
-        style: TextStyle(
-          fontSize: 25.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.white,
-        ),
+      appBar: MyAppBar(
+        text: "Profile",
+        leadingIcon: Icons.menu,
+        trailingIcon: Icons.search,
+        trailingIconOnTap: () {
+          Get.toNamed(RoutesNames.searchScreen);
+        },
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Get.toNamed(
-              RoutesNames.searchScreen,
-            );
-          },
-          icon: Icon(
-            Icons.search,
-            color: Colors.white,
-          ),
-        ),
-      ],
-    ),
       drawer: MyDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_app/helper/helper_function.dart';
 import 'package:chat_app/service/database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,33 +26,6 @@ class SearchController extends GetxController {
       });
     }
   }
-
-  //! maybe repeated
-  // TODO : Widgets shouldn't be written in controller
-  // groupList() {
-  //   return hasUserSearched
-  //       ? ListView.builder(
-  //           shrinkWrap: true,
-  //           itemCount: searchSnapshot!.docs.length,
-  //           itemBuilder: (context, index) {
-  //             joinedOrNot(
-  //                 userName!,
-  //                 searchSnapshot!.docs[index]['groupId'],
-  //                 searchSnapshot!.docs[index]['groupName'],
-  //                 searchSnapshot!.docs[index]['admin']);
-  //             return GroupTile(
-  //               groupId: searchSnapshot!.docs[index]['groupId'],
-  //               groupName: searchSnapshot!.docs[index]['groupName'],
-  //               userName: userName!,
-  //               admin: searchSnapshot!.docs[index]['admin'],
-  //             );
-  //           },
-  //         )
-  //       : Container();
-  // }
-
-  //! ABOVE THREE METHODS ARE PART OF GROUP MODULE THEN THEY SHOULD BE IN GROUPS CONTROLLER
-  //! SEARCH CONTROLLER HAS NOTHING TO DO WITH THE GROUP
 
   Future getCurrentUserName() async {
     userName = await HelperFunction.getUserNameFromSF();

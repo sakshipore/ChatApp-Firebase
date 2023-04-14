@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   Map<String, dynamic> userData = {};
-  // List<String?> userData = [];
   AuthService authService = AuthService();
   bool isLoading = true;
 

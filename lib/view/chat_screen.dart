@@ -48,7 +48,6 @@ class _ChatScreenState extends State<ChatScreen> {
             leadingIconOnTap: () {
               Get.back();
             },
-            //! Whenever there is back button set this property as false
             containsDrawer: false,
             leadingIcon: Icons.arrow_back,
             trailingIcon: Icons.info,
