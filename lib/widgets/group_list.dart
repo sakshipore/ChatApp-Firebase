@@ -1,5 +1,4 @@
 import 'package:chat_app/controller/groups_controller.dart';
-import 'package:chat_app/widgets/group_tile.dart';
 import 'package:chat_app/widgets/group_tile_home_screen.dart';
 import 'package:chat_app/widgets/no_group.dart';
 import 'package:flutter/material.dart';
