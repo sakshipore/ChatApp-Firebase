@@ -2,7 +2,7 @@ import 'package:chat_app/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyAppBar extends StatefulWidget with PreferredSizeWidget {
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String text;
   final VoidCallback? leadingIconOnTap;
   final IconData leadingIcon;

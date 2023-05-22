@@ -10,63 +10,63 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SearchController searchController = Get.find<SearchController>();
-
-    return GetBuilder<SearchController>(builder: (controller) {
-      return Scaffold(
-        appBar: MyAppBar(
-          text: "Search",
-          leadingIconOnTap: () {
-            Get.back();
-          },
-          containsDrawer: false,
-          leadingIcon: Icons.arrow_back,
-        ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: 10.h,
-            ),
-            Container(
-              // color: Color(0xffee7b64),
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SearchTextField(
-                      text: "Search groups",
-                      controller: controller.searchController,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await controller.initiateSearchMethod();
-                    },
-                    child: Container(
-                      width: 40.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(40.r),
-                      ),
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.deepPurple,
-                      ),
-                    ),
-                  ),
-                ],
+    return GetBuilder<Searchcontroller>(
+      builder: (controller) {
+        return Scaffold(
+          appBar: MyAppBar(
+            text: "Search",
+            leadingIconOnTap: () {
+              Get.back();
+            },
+            containsDrawer: false,
+            leadingIcon: Icons.arrow_back,
+          ),
+          body: Column(
+            children: [
+              SizedBox(
+                height: 10.h,
               ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ), 
-            // ListView.builder(
-            //   itemCount: controller.searchSnapshot.length,
-            // ),
-          ],
-        ),
-      );
-    });
+              Container(
+                // color: Color(0xffee7b64),
+                padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SearchTextField(
+                        text: "Search groups",
+                        controller: controller.searchController,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        await controller.initiateSearchMethod();
+                      },
+                      child: Container(
+                        width: 40.w,
+                        height: 40.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(40.r),
+                        ),
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              // ListView.builder(
+              //   itemCount: controller.searchSnapshot.length,
+              // ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

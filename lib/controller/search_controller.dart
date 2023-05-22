@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class SearchController extends GetxController {
+class Searchcontroller extends GetxController {
   TextEditingController searchController = new TextEditingController();
   bool isLoading = true;
   Object? searchSnapshot;
