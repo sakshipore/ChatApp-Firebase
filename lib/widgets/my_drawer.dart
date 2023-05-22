@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({super.key});
+  // TODO: To highlight the selected tab in drawer, create a variable index=0 and update it when user taps on one specific tab.
 
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(

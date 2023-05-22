@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
+  // TODO: Why is it not required parameter.
   final String? uid;
   DatabaseService({this.uid});
 

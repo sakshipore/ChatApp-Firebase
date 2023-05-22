@@ -24,7 +24,6 @@ class AuthController extends GetxController {
           emailController.text.trim(),
           passwordController.text);
       if (user != null) {
-        
         //? saving the shared preference data
         await HelperFunction.saveUserLoggedInStatus(true);
         await HelperFunction.saveUserEmailSF(emailController.text);
@@ -54,6 +53,7 @@ class AuthController extends GetxController {
           emailController.text.trim(), passwordController.text);
 
       if (user != null) {
+        // TODO: These functions are returning boolean values , Use them to confirm data has been stored successfully.
         await HelperFunction.saveUserLoggedInStatus(true);
         await HelperFunction.saveUserEmailSF(user.email!);
         Get.toNamed(RoutesNames.homeScreen);

@@ -13,6 +13,7 @@ class NoGroup extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // TODO: GestureDetector ??
           GestureDetector(
             child: Icon(
               Icons.add_circle,

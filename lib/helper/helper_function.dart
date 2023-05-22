@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO: These aren't helper functions, they are part of separate shared preference service.
 class HelperFunction {
   static String userLoggedInKey = "USERLOGGEDINKEY";
   static String userNameKey = "USERNAMEKEY";
@@ -15,6 +16,7 @@ class HelperFunction {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return sf.getString(userNameKey);
   }
+
   static Future<String?> getUserEmailFromSF() async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return sf.getString(userEmailKey);

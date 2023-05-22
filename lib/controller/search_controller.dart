@@ -29,9 +29,11 @@ class Searchcontroller extends GetxController {
 
   Future getCurrentUserName() async {
     userName = await HelperFunction.getUserNameFromSF();
+    // TODO: update() ??
   }
 
   Future getCurrentUserId() async {
     user = FirebaseAuth.instance.currentUser;
+    // TODO: update() ??
   }
 }

@@ -5,6 +5,7 @@ class MyTextFormField extends StatelessWidget {
   final Icon? icon;
   final String text;
   Function(String)? onChanged;
+  // TODO : Just create the variable controller , no need to initialize it.
   TextEditingController controller = new TextEditingController();
   MyTextFormField(
       {super.key,
@@ -17,6 +18,7 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      // TODO: Do not add checks on String values, Instead create boolean values i.e. isPassword.
       obscureText: text == "Password" ? true : false,
       onChanged: (value) {
         if (onChanged != null) {

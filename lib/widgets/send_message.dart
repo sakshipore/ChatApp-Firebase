@@ -12,27 +12,26 @@ class SendMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MessageController>(      
-      builder: (controller) {
-        return TextFormField(
-          controller: controller.messageController,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.deepPurple,
-              ),
+    // TODO: Why to use GetBuilder
+    return GetBuilder<MessageController>(builder: (controller) {
+      return TextFormField(
+        controller: controller.messageController,
+        decoration: InputDecoration(
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.deepPurple,
             ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.deepPurple,
-              ),
-            ),
-            hintText: text,
-            hintStyle: MyTextStyle.normalTextStyle,
           ),
-        );
-      }
-    );
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.deepPurple,
+            ),
+          ),
+          hintText: text,
+          hintStyle: MyTextStyle.normalTextStyle,
+        ),
+      );
+    });
   }
 }

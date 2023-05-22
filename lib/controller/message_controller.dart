@@ -33,7 +33,7 @@ class MessageController extends GetxController {
         "sender": userName,
         "time": DateTime.now().microsecondsSinceEpoch,
       };
-
+      // TODO: Error handling ??
       await service.sendMessage(groupId, chatMessageData);
       update();
       messageController.clear();

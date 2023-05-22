@@ -92,6 +92,7 @@ class GroupsController extends GetxController {
 
   Future<void> getGroupAdmin(String groupId) async {
     groupAdmin = await service.getGroupAdmin(groupId);
+    // TODO: update(); ??
   }
 
   Future<void> getGroupMembers(String groupId) async {

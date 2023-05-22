@@ -71,6 +71,7 @@ class _GroupInfoState extends State<GroupInfo> {
                                 widget.groupId,
                                 widget.groupName,
                               );
+                              // TODO: Why this route ??
                               Get.toNamed(RoutesNames.homeScreen);
                             },
                             icon: Icon(Icons.check),
