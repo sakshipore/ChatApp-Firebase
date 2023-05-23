@@ -5,8 +5,7 @@ class MyTextFormField extends StatelessWidget {
   final Icon? icon;
   final String text;
   Function(String)? onChanged;
-  // TODO : Just create the variable controller , no need to initialize it.
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller;
   MyTextFormField(
       {super.key,
       this.icon,
