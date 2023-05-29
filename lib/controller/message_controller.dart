@@ -27,16 +27,19 @@ class MessageController extends GetxController {
   }
 
   Future<void> sendMessage(String userName, String groupId) async {
-    if (messageController.text.isNotEmpty) {
-      Map<String, dynamic> chatMessageData = {
-        "message": messageController.text,
-        "sender": userName,
-        "time": DateTime.now().microsecondsSinceEpoch,
-      };
-      // TODO: Error handling ??
-      await service.sendMessage(groupId, chatMessageData);
-      update();
-      messageController.clear();
+    try {
+      if (messageController.text.isNotEmpty) {
+        Map<String, dynamic> chatMessageData = {
+          "message": messageController.text,
+          "sender": userName,
+          "time": DateTime.now().microsecondsSinceEpoch,
+        };
+        await service.sendMessage(groupId, chatMessageData);
+        update();
+        messageController.clear();
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

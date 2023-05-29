@@ -1,4 +1,6 @@
 import 'package:chat_app/constants/text_style.dart';
+import 'package:chat_app/widgets/pop_up_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,8 +15,14 @@ class NoGroup extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // TODO: GestureDetector ??
           GestureDetector(
+            onTap: () {
+              String userId =  FirebaseAuth.instance.currentUser!.uid;
+              popUpDialog(
+                context,
+                userId,
+              );
+            },
             child: Icon(
               Icons.add_circle,
               color: Colors.grey,
